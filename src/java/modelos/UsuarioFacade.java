@@ -9,6 +9,7 @@ import entidades.Usuario;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +28,17 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     public UsuarioFacade() {
         super(Usuario.class);
+    }
+    
+    public Usuario buscarUsuario(String txtUsuario, String txtPassword) {
+        Query q = em.createQuery("SELECT u FROM Usuario u WHERE u.usuario = :txtUsuario AND u.clave = :txtPassword");
+        q.setParameter("txtUsuario", txtUsuario);
+        q.setParameter("txtPassword", txtPassword);
+        if (!q.getResultList().isEmpty()) {
+            return (Usuario) q.getSingleResult();
+        } else {
+            return null;
+        }
     }
     
 }
