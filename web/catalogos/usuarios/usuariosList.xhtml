@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../../plantilla/Plantilla.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form id="frmUsuarios">
+            <p:dataTable var="usuario"  value="#{usuarioControl.lstUsuarios}"
+                         paginator="true" paginatorPosition="button"
+                         rows="3" id="tblUsuarios" widgetVar="wTblUsuario"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="3,5,10,15"
+                         >
+                <f:facet name="header">
+
+                    <p:outputPanel>
+                        <h:outputText value="Búsqueda: " />
+                        <p:inputText id="globalFilter" onkeyup="PF('wTblUsuario').filter()" 
+                                     style="width:150px" placeholder="Ingrese la búsquda"/>
+                    </p:outputPanel>
+                </f:facet>
+
+                <p:column headerText="CODIGO" sortBy="#{usuario.idUsuario}" filterBy="#{usuario.idUsuario}">
+                    <p:outputLabel value="#{usuario.idUsuario}" />
+                </p:column>
+
+                <p:column headerText="USUARIO" sortBy="#{usuario.usuario}" filterBy="#{usuario.usuario}">
+                    <p:outputLabel value="#{usuario.usuario}" />
+                </p:column>
+
+                <p:column headerText="ESTADO" sortBy="#{usuario.idEstado.estado}" filterBy="#{usuario.idEstado.estado}">
+                    <p:outputLabel value="#{usuario.idEstado.estado}" />
+                </p:column>
+
+                <p:column style="text-align: center" headerText="FECHA CREACION" sortBy="#{usuario.fechaCreacion}" filterBy="#{usuario.fechaCreacion}">
+                    <p:outputLabel value="#{usuario.fechaCreacion}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" locale="ES_SV" />
+                    </p:outputLabel>
+                </p:column>
+
+                <p:column style="text-align: center" headerText="FECHA MODIFICACION" sortBy="#{usuario.fechaModificacion}" filterBy="#{usuario.fechaModificacion}">
+                    <p:outputLabel value="#{usuario.fechaModificacion}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" locale="ES_SV" />
+                    </p:outputLabel>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../../plantilla/Plantilla.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form id="frmEmpleados">
+            <p:dataTable var="empleado"  value="#{empleadosControl.lstEmpleado}"
+                         paginator="true" paginatorPosition="button"
+                         rows="3" id="tblEmpleados" widgetVar="wTblEmpleado"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="3,5,10,15"
+                         >
+                
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="Búsqueda: " />
+                        <p:inputText id="globalFilter" onkeyup="PF('wTblEmpleado').filter()" 
+                                     style="width:150px" placeholder="Ingrese la búsquda"/>
+                        
+                    </p:outputPanel>
+                    
+                </f:facet>
+                
+                <p:column headerText="CODIGO" sortBy="#{empleado.idEmpleado}" filterBy="#{empleado.idEmpleado}">
+                    <p:outputLabel value="#{empleado.idEmpleado}" />
+                </p:column>
+
+                <p:column headerText="NOMBRE" sortBy="#{empleado.nombre}" filterBy="#{empleado.nombre}">
+                    <p:outputLabel value="#{empleado.nombre}" />
+                </p:column>
+
+                <p:column headerText="DUI" sortBy="#{empleado.dui}" filterBy="#{empleado.dui}">
+                    <p:outputLabel value="#{empleado.dui}" />
+                </p:column>
+
+                <p:column headerText="NIT" sortBy="#{empleado.nit}" filterBy="#{empleado.nit}">
+                    <p:outputLabel value="#{empleado.nit}" />
+                </p:column>
+
+                <p:column headerText="FECHA INGRESO" sortBy="#{empleado.fechaIngreso}" filterBy="#{empleado.fechaIngreso}">
+                    <p:outputLabel value="#{empleado.fechaIngreso}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" locale="ES_SV" />
+                    </p:outputLabel>
+                </p:column>
+
+                <p:column headerText="SALARIO" sortBy="#{empleado.salario}" filterBy="#{empleado.salario}">
+                    <p:outputLabel value="#{empleado.salario}" >
+                        
+                    </p:outputLabel>
+                </p:column>
+                
+                
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
