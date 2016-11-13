@@ -6,6 +6,8 @@
 package modelos;
 
 import entidades.Usuario;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -39,6 +41,28 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         } else {
             return null;
         }
+    }
+    
+    public Long contar(String filtro){
+        Long resultado = (long) 0;
+        if (filtro == null) filtro = "";
+        
+        Query q = em.createQuery("SELECT COUNT(U) FROM Usuario U WHERE U.usuario LIKE :filtro");
+        q.setParameter("filtro", "%" +  filtro + "%");
+        if (!q.getResultList().isEmpty()) {
+            return (Long) q.getSingleResult();
+        }
+        return resultado;
+    }
+    
+    public List<Usuario> getFiltro(int first, int pageSize, String filtro) {
+        List<Usuario> resultado = new ArrayList<>();
+        if (filtro == null) filtro = "";
+        Query q = em.createQuery("SELECT U FROM Usuario U WHERE U.usuario LIKE :filtro")
+                .setFirstResult(first).setMaxResults(pageSize);
+        q.setParameter("filtro", "%" + filtro + "%");
+        if (!q.getResultList().isEmpty()) return q.getResultList();
+        return resultado;
     }
     
 }

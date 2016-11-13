@@ -21,9 +21,9 @@ public class Autenticacion implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         if (((HttpServletRequest) req).getSession().getAttribute("usuario") == null) {
-            ((HttpServletResponse) resp).sendRedirect("/S1_MODULO6");
+            ((HttpServletResponse) resp).sendRedirect("/M6S1E1");
         } else {
-            chain.doFilter(req, resp);
+            chain.doFilter(req, resp); 
         }
     }
 

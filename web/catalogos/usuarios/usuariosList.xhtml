@@ -6,9 +6,6 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="top">
-        <h2>Bienvenido #{usuario.usuario}</h2>
-    </ui:define>
 
     <ui:define name="content">
         <h:form id="frmUsuarios">
@@ -21,25 +18,26 @@
                 <f:facet name="header">
 
                     <p:outputPanel>
-                        <h:outputText value="Búsqueda: " />
+                        LISTADO DE USUARIOS <br />
+                        <h:outputText value="Búsqueda " />
                         <p:inputText id="globalFilter" onkeyup="PF('wTblUsuario').filter()" 
                                      style="width:150px" placeholder="Ingrese la búsquda"/>
                         <p:commandButton value="PDF" ajax="false" icon="ui-icon-document">
-                            <p:dataExporter type="pdf" target="tblUsuarios" fileName="Listado Usuarios.pdf" 
+                            <p:dataExporter type="pdf" target="tblUsuarios" fileName="ListadoUsuarios" 
                                             encoding="ISO-8859-1" preProcessor="#{postProcess.preProcessPDF}"/>
                         </p:commandButton>
 
                         <p:commandButton value="CSV" ajax="false" icon="ui-icon-document">
-                            <p:dataExporter type="csv" target="tblUsuarios" fileName="Listado Usuarios.csv" 
+                            <p:dataExporter type="csv" target="tblUsuarios" fileName="ListadoUsuarios" 
                                             encoding="ISO-8859-1"/>
                         </p:commandButton>  
                         <p:commandButton value="XLS" ajax="false" icon="ui-icon-document">
-                            <p:dataExporter type="xls" target="tblUsuarios" fileName="Listado Usuarios.xls" 
-                                            preProcessor="#{postProcess.postProcessXLS}"/>
+                            <p:dataExporter type="xls" target="tblUsuarios" fileName="ListadoUsuarios" 
+                                            postProcessor="#{postProcess.postProcessXLS}"/>
                         </p:commandButton>          
 
                         <p:commandButton value="XML" ajax="false" icon="ui-icon-document">
-                            <p:dataExporter type="xml" target="tblUsuarios" fileName="Listado Usuarios.xml" />
+                            <p:dataExporter type="xml" target="tblUsuarios" fileName="ListadoUsuarios" />
                         </p:commandButton>                          
                     </p:outputPanel>
                 </f:facet>

@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -14,10 +15,24 @@
     <h:body>
 
         <div id="top">
-            <h2>Ejemplo Modulo 6 Semana 1</h2>
+            <h2>Ejemplo módulo 6 semena 2</h2>
+            <h:form>
+                <p:menubar rendered="#{loginControl.usuarioValidado != null}">
+                    <p:submenu label="Catálogos" icon="ui-icon-document">
+                        <p:menuitem value="Usuarios" url="../usuarios/usuariosList.xhtml" />
+                        <p:menuitem value="Usuarios Modo Lazy" url="../usuarios/usuariosLazy.xhtml" />
+                        <p:menuitem value="Empleados" url="../empleados/empleadosList.xhtml" />
+                    </p:submenu>
+                </p:menubar>
+                <p:commandButton styleClass="button" value="Cerrar Sesión" 
+                                 action="#{loginControl.cerrarSesion}" 
+                                 rendered="#{loginControl.usuarioValidado != null}" />
+            </h:form>
+            <p:outputLabel rendered="#{loginControl.usuarioValidado != null}"  value="Bienvenido #{usuario.usuario}"/>
             <ui:insert name="top"></ui:insert>
-        </div>
-
+        </div>        
+        
+        
         <div id="content" class="center_content">
             <ui:insert name="content">Content</ui:insert>
         </div>

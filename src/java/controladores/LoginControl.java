@@ -15,6 +15,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import modelos.UsuarioFacade;
 
+
 @ManagedBean
 @SessionScoped
 public class LoginControl implements Serializable {
@@ -51,7 +52,8 @@ public class LoginControl implements Serializable {
         usuarioValidado = usuarioFacade.buscarUsuario(txtUsuario, txtPassword);
         if (usuarioValidado != null) {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuarioValidado);
-            return "/catalogos/usuarios/usuariosList.xhtml?faces-redirect=true";
+            //return "/catalogos/usuarios/usuariosList.xhtml?faces-redirect=true";
+            return "/catalogos/usuarios/usuariosLazy.xhtml?faces-redirect=true";
         } else {
             FacesContext.getCurrentInstance().addMessage(null, 
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Información", 
@@ -59,4 +61,20 @@ public class LoginControl implements Serializable {
             return null;
         }
     }
+
+    public String cerrarSesion() {
+        usuarioValidado = null;
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "/faces/index.xhtml?faces-redirect=true";
+    }
+    
+    public Usuario getUsuarioValidado() {
+        return usuarioValidado; 
+    }
+
+    public void setUsuarioValidado(Usuario usuarioValidado) {
+        this.usuarioValidado = usuarioValidado;
+    }
+    
+    
 }
